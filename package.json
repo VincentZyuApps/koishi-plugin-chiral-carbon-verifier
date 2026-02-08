@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-chiral-carbon-verifier",
   "description": "手性碳入群验证",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.1+20260208",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -9,13 +9,11 @@
     "dist"
   ],
   "license": "MIT",
-  "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
     "plugin"
   ],
-  "devDependencies": {},
   "peerDependencies": {
     "koishi": "^4.18.7"
   }
