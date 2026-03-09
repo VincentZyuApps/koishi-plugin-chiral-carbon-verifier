@@ -1,3 +1,5 @@
+![koishi-plugin-chiral-carbon-verifier](https://socialify.git.ci/VincentZyuApps/koishi-plugin-chiral-carbon-verifier/image?description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Ff%2Ff3%2FKoishi.js_Logo.png&name=1&owner=1&pulls=1&stargazers=1&theme=Auto)
+
 # koishi-plugin-chiral-carbon-verifier
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-chiral-carbon-verifier?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-chiral-carbon-verifier)
