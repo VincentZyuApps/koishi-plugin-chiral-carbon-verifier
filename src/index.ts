@@ -5,8 +5,15 @@ import { extendDatabase, DatabaseService } from './database'
 import { Verifier } from './verifier'
 import { registerEvents } from './events'
 import { registerCommands } from './commands'
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
 
 export const name = 'chiral-carbon-verifier'
+
+const PLUGIN_NAME = name
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, '../package.json'), 'utf-8')
+)
 
 export const inject = {
   required: ['database', 'http'],
@@ -15,47 +22,68 @@ export const inject = {
 export { Config } from './types'
 
 export const usage = `
-## 🧪 手性碳入群验证插件
+<h1>🧪 Koishi 插件: 手性碳入群验证 ${PLUGIN_NAME} 🧪</h1>
+<h2>🎯 插件版本：v${pkg.version}</h2>
 
-基于 [crystelf-plugin](https://github.com/crystelf/crystelf-plugin) 的入群验证功能移植。
+<p>基于 <a href="github.com/Jerryplusy/crystelf-plugin">crystelf-plugin</a> 的入群验证功能移植。</p>
 
-### 🎯 功能特点
+<h2 style="color: #ff4444; font-weight: 900; font-size: 22px; margin: 20px 0;">⚠️ 重要提示：需要开启 <b>database</b> 和 <b>http</b> 插件，本插件才能正常使用捏！</h2>
 
-1. **双模式验证**
-   - 🧪 **手性碳验证**：发送有机化学分子图，要求识别手性碳区域
-   - 🔢 **数字验证**：简单的数学计算题（自动降级备选）
+<p><del>💬 插件使用问题 / 🐛 Bug反馈 / 👨‍💻 插件开发交流，欢迎加入QQ群：<b>259248174</b>   🎉（这个群G了</del> </p> 
+<p>💬 插件使用问题 / 🐛 Bug反馈 / 👨‍💻 插件开发交流，欢迎加入QQ群：<b>1085190201</b> 🎉</p>
+<p>💡 在群里直接艾特我，回复的更快哦~ ✨</p>
 
-2. **自动降级机制**
-   - 优先使用手性碳 API
-   - API 失败时自动切换为数字验证
+<hr>
 
-3. **灵活配置**
-   - 全局配置 + 群单独配置
-   - 支持困难模式（需答出所有区域）
-   - 可配置超时时间、尝试次数、是否踢出等
+<h3>🎯 功能特点</h3>
+<ul>
+  <li>🧪 <b>手性碳验证</b>：发送有机化学分子图，要求识别手性碳区域</li>
+  <li>🔢 <b>数字验证</b>：简单的数学计算题（自动降级备选）</li>
+  <li>🔄 <b>自动降级</b>：优先使用手性碳 API，失败时自动切换为数字验证</li>
+  <li>⚙️ <b>灵活配置</b>：全局配置 + 群单独配置，支持困难模式</li>
+  <li>💬 <b>自定义文案</b>：验证通过/失败/超时等所有文案均可自定义，支持模板变量</li>
+</ul>
 
-### 📝 可用命令
+<hr>
 
-| 命令 | 别名 | 说明 |
-|------|------|------|
-| \`chiral.bypass @用户\` | 绕过验证 | 管理员绕过指定用户的验证 |
-| \`chiral.reverify @用户\` | 重新验证 | 对指定用户重新发起验证 |
-| \`chiral.enable\` | 开启验证 | 开启本群入群验证 |
-| \`chiral.disable\` | 关闭验证 | 关闭本群入群验证 |
-| \`chiral.mode [carbon/math]\` | 切换验证模式 | 切换验证模式 |
-| \`chiral.hard [true/false]\` | 设置困难模式 | 设置手性碳困难模式 |
-| \`chiral.stats\` | 验证统计 | 查看本群验证统计 |
-| \`chiral.config\` | 验证配置 | 查看本群验证配置 |
+<h3>📝 可用命令</h3>
+<table>
+  <tr><th>命令</th><th>别名</th><th>说明</th></tr>
+  <tr><td><code>chiral.bypass @用户</code></td><td>绕过验证</td><td>管理员绕过指定用户的验证</td></tr>
+  <tr><td><code>chiral.reverify @用户</code></td><td>重新验证</td><td>对指定用户重新发起验证</td></tr>
+  <tr><td><code>chiral.enable</code></td><td>开启验证</td><td>开启本群入群验证</td></tr>
+  <tr><td><code>chiral.disable</code></td><td>关闭验证</td><td>关闭本群入群验证</td></tr>
+  <tr><td><code>chiral.mode [carbon/math]</code></td><td>切换验证模式</td><td>切换验证模式</td></tr>
+  <tr><td><code>chiral.hard [true/false]</code></td><td>设置困难模式</td><td>设置手性碳困难模式</td></tr>
+  <tr><td><code>chiral.stats</code></td><td>验证统计</td><td>查看本群验证统计</td></tr>
+  <tr><td><code>chiral.config</code></td><td>验证配置</td><td>查看本群验证配置</td></tr>
+</table>
 
-### ⚠️ 注意事项
+<hr>
 
-- 需要 bot 有群管理员权限才能踢人
-- 手性碳 API 默认使用 \`https://api.crystelf.com\`，可在配置中修改
-- 主人账号可自动绕过验证
+<h3>💬 自定义文案模板变量说明</h3>
+<table>
+  <tr><th>配置项</th><th>可用变量</th><th>说明</th></tr>
+  <tr><td><code>mathPrompt</code></td><td><code>{timeout}</code> <code>{expression}</code></td><td>数学验证提示</td></tr>
+  <tr><td><code>carbonPrompt</code></td><td><code>{timeout}</code> <code>{modeHint}</code> <code>{regionCount}</code></td><td>手性碳验证提示</td></tr>
+  <tr><td><code>wrongAnswer</code></td><td><code>{remaining}</code></td><td>答错提醒</td></tr>
+  <tr><td><code>timeoutReminder</code></td><td><code>{seconds}</code></td><td>超时前提醒</td></tr>
+</table>
 
-### 📜 许可证
+<hr>
 
-本插件参考 crystelf-plugin（MIT License）的业务逻辑实现。
+<h3>⚠️ 注意事项</h3>
+<ul>
+  <li>需要 bot 有群管理员权限才能踢人</li>
+  <li>手性碳 API 默认使用 <code>https://carbon.crystelf.top</code>，可在配置中修改</li>
+  <li>主人账号可自动绕过验证</li>
+</ul>
+
+<hr>
+
+<h3>📜 许可证</h3>
+<p>本插件参考 crystelf-plugin（MIT License）的业务逻辑实现。</p>
+<p>🆓 本插件为开源免费项目，基于 MIT 协议开放。</p>
 `
 
 export function apply(ctx: Context, config: Config) {

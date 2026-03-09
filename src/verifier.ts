@@ -4,6 +4,11 @@ import { DatabaseService } from './database'
 
 const logger = new Logger('chiral-carbon-verifier:verifier')
 
+/** 模板渲染：将 {key} 替换为对应变量值 */
+export function renderTemplate(template: string, vars: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (_, key) => String(vars[key] ?? `{${key}}`))
+}
+
 /** 手性碳 API 响应类型 */
 interface CarbonApiResponse {
   code?: number
@@ -145,10 +150,11 @@ export class Verifier {
               h.at(userId),
               h.text('\n'),
               h.image(`base64://${carbonResult.base64}`),
-              h.text(`\n上图中有一块或多块区域含有手性碳原子`),
-              h.text(`\n为了加入本群，你需要在 ${this.config.verifyTimeout} 秒内正确找出${modeHint}`),
-              h.text(`\n回答时，直接发送区域代号即可，多个区域用逗号隔开`),
-              h.text(`\n提示：本图共有 ${regionCount} 块手性碳区域~`),
+              h.text('\n' + renderTemplate(this.config.messages.carbonPrompt, {
+                timeout: this.config.verifyTimeout,
+                modeHint,
+                regionCount,
+              })),
             ],
           }
         }
@@ -208,7 +214,10 @@ export class Verifier {
       type: VerifyType.MATH,
       message: [
         h.at(userId),
-        h.text(`\n请在 ${this.config.verifyTimeout} 秒内发送 ${a} ${op} ${b} 的计算结果~`),
+        h.text('\n' + renderTemplate(this.config.messages.mathPrompt, {
+          timeout: this.config.verifyTimeout,
+          expression: `${a} ${op} ${b}`,
+        })),
       ],
     }
   }
@@ -317,7 +326,7 @@ export class Verifier {
         passed: true,
         failed: false,
         remainingAttempts,
-        message: '验证通过，欢迎加入本群~',
+        message: this.config.messages.verifyPass,
       }
     }
 
@@ -331,7 +340,7 @@ export class Verifier {
         passed: false,
         failed: true,
         remainingAttempts: 0,
-        message: '验证失败，你错太多次啦！',
+        message: this.config.messages.verifyFail,
       }
     }
 
@@ -341,7 +350,7 @@ export class Verifier {
       passed: false,
       failed: false,
       remainingAttempts,
-      message: `回答错了呢，你还有 ${remainingAttempts} 次机会，再试试看？`,
+      message: renderTemplate(this.config.messages.wrongAnswer, { remaining: remainingAttempts }),
     }
   }
 

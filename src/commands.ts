@@ -56,7 +56,7 @@ export function registerCommands(
 
       return [
         h.at(targetUserId),
-        h.text(' 已绕过验证，欢迎加入本群~'),
+        h.text(' ' + config.messages.bypassSuccess),
       ]
     })
 
@@ -88,6 +88,25 @@ export function registerCommands(
         return '无法解析用户 ID'
       }
 
+      // 检查目标用户是否为管理员或群主（移植自原插件）
+      try {
+        if (session.onebot) {
+          const memberInfo = await session.onebot.getGroupMemberInfo(session.guildId, targetUserId)
+          if (memberInfo.role === 'owner' || memberInfo.role === 'admin') {
+            return '这对吗'
+          }
+          // 检查入群时长
+          if (config.reverifyMaxJoinDays > 0 && memberInfo.join_time) {
+            const joinDays = (Date.now() / 1000 - memberInfo.join_time) / 86400
+            if (joinDays > config.reverifyMaxJoinDays) {
+              return `该成员已入群 ${Math.floor(joinDays)} 天，超过 ${config.reverifyMaxJoinDays} 天限制，无法重新验证`
+            }
+          }
+        }
+      } catch (error) {
+        ctx.logger('chiral-carbon-verifier').warn('获取成员信息失败:', error)
+      }
+
       // 检查是否已在验证中
       if (verifier.isVerifying(session.guildId, targetUserId)) {
         return '该用户已在验证中..'
@@ -110,7 +129,7 @@ export function registerCommands(
           
           await session.send([
             h.at(targetUserId),
-            h.text('\n验证超时啦！'),
+            h.text('\n' + config.messages.verifyTimeout),
           ])
 
           if (config.kickOnFail) {

@@ -2,7 +2,7 @@ import { Context, h, Logger, Session } from 'koishi'
 import {} from 'koishi-plugin-adapter-onebot'
 import { Config, VerifyType } from './types'
 import { DatabaseService } from './database'
-import { Verifier } from './verifier'
+import { Verifier, renderTemplate } from './verifier'
 
 const logger = new Logger('chiral-carbon-verifier:events')
 
@@ -113,7 +113,7 @@ export function registerEvents(
         if (verifier.isVerifying(guildId, userId)) {
           await session.send([
             h.at(userId),
-            h.text(`\n小朋友，你还有 ${config.reminderBeforeTimeout} 秒的时间完成验证噢~`),
+            h.text('\n' + renderTemplate(config.messages.timeoutReminder, { seconds: config.reminderBeforeTimeout })),
           ])
         }
       }, reminderDelay)
@@ -126,7 +126,7 @@ export function registerEvents(
         
         await session.send([
           h.at(userId),
-          h.text('\n验证超时啦！请重新申请入群~'),
+          h.text('\n' + config.messages.verifyTimeout),
         ])
 
         if (config.kickOnFail) {
@@ -145,7 +145,7 @@ export function registerEvents(
       verifier.removeSession(guildId, userId)
       logger.info(`用户 ${userId} 主动退群，验证流程结束`)
       
-      await session.send('害，怎么跑路了')
+      await session.send(config.messages.memberLeft)
     }
   })
 

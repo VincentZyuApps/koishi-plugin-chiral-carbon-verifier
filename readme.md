@@ -118,7 +118,7 @@ yarn add koishi-plugin-chiral-carbon-verifier
 
 ## 📜 致谢
 
-本插件参考 [crystelf-plugin](https://github.com/crystelf/crystelf-plugin) 的业务逻辑实现，感谢原作者的创意！
+本插件参考 [crystelf-plugin](github.com/Jerryplusy/crystelf-plugin) 的业务逻辑实现，感谢原作者的创意！
 
 ## 📄 许可证
 
