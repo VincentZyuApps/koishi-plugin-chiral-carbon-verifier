@@ -9,6 +9,11 @@
     "dist"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/VincentZyuApps/koishi-plugin-chiral-carbon-verifier",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/vincent-zyu/koishi-plugin-chiral-carbon-verifier"
+  },
   "keywords": [
     "chatbot",
     "koishi",
