@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-chiral-carbon-verifier",
   "description": "手性碳入群验证, 基于github.com/Jerryplusy/crystelf-plugin的移植",
-  "version": "0.0.2-beta.1+20260309",
+  "version": "0.0.2-beta.2+20260313",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [

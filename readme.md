@@ -1,11 +1,17 @@
-![koishi-plugin-chiral-carbon-verifier](https://socialify.git.ci/VincentZyuApps/koishi-plugin-chiral-carbon-verifier/image?description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Ff%2Ff3%2FKoishi.js_Logo.png&name=1&owner=1&pulls=1&stargazers=1&theme=Auto)
+![koishi-plugin-chiral-carbon-verifier](https://socialify.git.ci/VincentZyuApps/koishi-plugin-chiral-carbon-verifier/image?description=1&font=Bitter&forks=1&issues=1&language=1&logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Ff%2Ff3%2FKoishi.js_Logo.png&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
 
 # koishi-plugin-chiral-carbon-verifier
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-chiral-carbon-verifier?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-chiral-carbon-verifier)
 [![npm-download](https://img.shields.io/npm/dm/koishi-plugin-chiral-carbon-verifier?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-chiral-carbon-verifier)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/koishi-plugin-chiral-carbon-verifier)
+[![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/koishi-plugin-chiral-carbon-verifier)
 
-🧪 手性碳入群验证 - 用有机化学知识守护你的群聊
+<p><del>💬 插件使用问题 / 🐛 Bug反馈 / 👨‍💻 插件开发交流，欢迎加入QQ群：<b>259248174</b>   🎉（这个群G了）</del></p> 
+<p>💬 插件使用问题 / 🐛 Bug反馈 / 👨‍💻 插件开发交流，欢迎加入新QQ群：<b>1085190201</b> 🎉</p>
+<p>💡 在群里直接艾特我，回复的更快哦~ ✨</p>
+
+# 🧪 手性碳入群验证 - 用有机化学知识守护你的群聊
 
 ## ✨ 功能特点
 
