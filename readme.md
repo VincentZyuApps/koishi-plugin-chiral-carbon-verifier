@@ -123,6 +123,17 @@ yarn add koishi-plugin-chiral-carbon-verifier
 - 手性碳 API 默认使用 `https://carbon.crystelf.top`，可在配置中修改
 - 主人账号会自动绕过验证
 - 建议将 `verifyTimeout` 设置为 120 秒以上，给新成员足够的答题时间
+- ⚠️ **我只测试了 [Napcat](https://napneko.github.io/)，不知道其他的 OneBot 协议端 or 其他平台能不能用（**
+
+## 📸 效果展示
+
+### QQ 群内使用效果
+![QQ群内使用效果](doc/qq群内使用效果图捏.png)
+
+### 开发环境信息
+> 开发 & 测试时使用的 Napcat 版本等信息，供参考：
+
+![开发环境信息](doc/开发环境使用的napcat版本等信息捏.png)
 
 ## 📜 致谢
 
